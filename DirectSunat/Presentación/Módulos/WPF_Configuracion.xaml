@@ -1,0 +1,443 @@
+<UserControl x:Class="DirectSunat.Presentación.Módulos.WPF_Configuracion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:local="clr-namespace:DirectSunat.Presentación.Módulos"
+             mc:Ignorable="d"
+             d:DesignHeight="550" d:DesignWidth="900"
+             Margin="0">
+
+    <UserControl.Resources>
+        <!-- Estilo para los botones de apartados del panel interno fijo -->
+        <Style x:Key="SubMenuButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="White"/>
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Height" Value="46"/>
+            <Setter Property="Margin" Value="10,4"/>
+            <Setter Property="Cursor" Value="Hand"/>
+            <Setter Property="HorizontalContentAlignment" Value="Left"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border x:Name="border"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8"
+                                Padding="14,0">
+                            <ContentPresenter VerticalAlignment="Center"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#6A1B9A"/>
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="border" Property="Background" Value="#8E24AA"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+    <Grid Background="#7B1FA2" Margin="0">
+        <Grid.ColumnDefinitions>
+            <!-- Panel interno fijo (NO colapsable) -->
+            <ColumnDefinition Width="230"/>
+            <!-- Contenido del apartado seleccionado -->
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- PANEL INTERNO NO COLAPSABLE -->
+        <Border Grid.Column="0"
+                Background="#4A148C"
+                BorderBrush="#6A1B9A"
+                BorderThickness="0,0,1,0">
+            <StackPanel Margin="0,16,0,16">
+
+                <TextBlock Text="Apartados de Configuración"
+                           FontSize="14"
+                           FontWeight="Bold"
+                           Foreground="#E1BEE7"
+                           Margin="18,4,14,12"/>
+
+                <Separator Background="#6A1B9A"
+                           Margin="14,0,14,10"
+                           Height="1"/>
+
+                <!-- Apartado 1: Corporaciones -->
+                <Button x:Name="BtnSubCorporaciones"
+                        Style="{StaticResource SubMenuButtonStyle}"
+                        Background="#7B1FA2"
+                        Click="BtnSubCorporaciones_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🏢" FontSize="16" Width="24" TextAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Corporaciones"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Apartado 2: Empresas -->
+                <Button x:Name="BtnSubEmpresas"
+                        Style="{StaticResource SubMenuButtonStyle}"
+                        Click="BtnSubEmpresas_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🏛️" FontSize="16" Width="24" TextAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Empresas"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Apartado 3: Configurar Documentos -->
+                <Button x:Name="BtnSubConfigurarDocumentos"
+                        Style="{StaticResource SubMenuButtonStyle}"
+                        Click="BtnSubConfigurarDocumentos_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="📄" FontSize="16" Width="24" TextAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Configurar Documentos"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+                <!-- Apartado 4: Personalizar -->
+                <Button x:Name="BtnSubPersonalizar"
+                        Style="{StaticResource SubMenuButtonStyle}"
+                        Click="BtnSubPersonalizar_Click">
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center">
+                        <TextBlock Text="🎨" FontSize="16" Width="24" TextAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock Text="Personalizar"
+                                   FontSize="14"
+                                   FontWeight="SemiBold"
+                                   Margin="10,0,0,0"
+                                   VerticalAlignment="Center"/>
+                    </StackPanel>
+                </Button>
+
+            </StackPanel>
+        </Border>
+
+        <!-- ÁREA DE CONTENIDO DEL APARTADO ACTIVO -->
+        <Grid Grid.Column="1" Margin="24">
+
+            <!-- Vista 1: Corporaciones -->
+            <Grid x:Name="ViewCorporaciones" Visibility="Visible">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Corporaciones"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"
+                           Margin="0,0,0,14"/>
+
+                <!-- Botón rectangular con bordes redondeados llamado "Crear Corporacion" -->
+                <Button x:Name="BtnCrearCorporacion"
+                        Grid.Row="1"
+                        Content="Crear Corporacion"
+                        Width="165"
+                        Height="38"
+                        HorizontalAlignment="Left"
+                        Background="#4A148C"
+                        Foreground="White"
+                        FontSize="14"
+                        FontWeight="SemiBold"
+                        BorderBrush="#E1BEE7"
+                        BorderThickness="1"
+                        Cursor="Hand">
+                    <Button.Template>
+                        <ControlTemplate TargetType="Button">
+                            <Border x:Name="btnBorder"
+                                    Background="{TemplateBinding Background}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    BorderThickness="{TemplateBinding BorderThickness}"
+                                    CornerRadius="8">
+                                <ContentPresenter HorizontalAlignment="Center"
+                                                  VerticalAlignment="Center"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter TargetName="btnBorder" Property="Background" Value="#5E1688"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter TargetName="btnBorder" Property="Background" Value="#38006B"/>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Button.Template>
+                </Button>
+
+                <!-- Línea fina gris como separador -->
+                <Separator Grid.Row="2"
+                           Background="#B0B0B0"
+                           Height="1"
+                           Margin="0,14,0,14"/>
+
+                <!-- Grilla / tabla de Corporaciones (Id, Nombre, Ver Empresas Asociadas, Acciones[Editar, Eliminar]) -->
+                <DataGrid x:Name="dgvCorporaciones"
+                          Grid.Row="3"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="#E0E0E0"
+                          RowHeight="42"
+                          ColumnHeaderHeight="40"
+                          Background="White"
+                          Foreground="#212121"
+                          BorderBrush="#4A148C"
+                          BorderThickness="1">
+                    <DataGrid.Columns>
+                        <!-- Columna Id -->
+                        <DataGridTextColumn Header="Id"
+                                            Binding="{Binding Id}"
+                                            Width="70"/>
+
+                        <!-- Columna Nombre -->
+                        <DataGridTextColumn Header="Nombre"
+                                            Binding="{Binding Nombre}"
+                                            Width="*"/>
+
+                        <!-- Columna Ver Empresas Asociadas -->
+                        <DataGridTemplateColumn Header="Ver Empresas Asociadas" Width="190">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Button Content="Ver Empresas"
+                                            Padding="12,5"
+                                            Margin="6,4"
+                                            Background="#6A1B9A"
+                                            Foreground="White"
+                                            FontWeight="SemiBold"
+                                            BorderThickness="0"
+                                            Cursor="Hand"/>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+
+                        <!-- Columna Acciones (Editar y Eliminar) -->
+                        <DataGridTemplateColumn Header="Acciones" Width="190">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal"
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center">
+                                        <Button Content="Editar"
+                                                Width="72"
+                                                Height="28"
+                                                Margin="0,0,8,0"
+                                                Background="#1976D2"
+                                                Foreground="White"
+                                                FontWeight="SemiBold"
+                                                BorderThickness="0"
+                                                Cursor="Hand"/>
+                                        <Button Content="Eliminar"
+                                                Width="72"
+                                                Height="28"
+                                                Background="#D32F2F"
+                                                Foreground="White"
+                                                FontWeight="SemiBold"
+                                                BorderThickness="0"
+                                                Cursor="Hand"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Vista 2: Empresas -->
+            <!-- Diseño:
+                 Empresas                    Crear Empresa
+                 < Línea separadora >
+                 Tabla o grilla con (Id, Razon social, RUC, Corporacion) -->
+            <Grid x:Name="ViewEmpresas" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <!-- Encabezado: Empresas (izquierda) y Crear Empresa (derecha) -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Línea separadora -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Tabla o grilla de Empresas -->
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <!-- Fila superior: Empresas          Crear Empresa -->
+                <Grid Grid.Row="0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto"/>
+                    </Grid.ColumnDefinitions>
+
+                    <TextBlock Grid.Column="0"
+                               Text="Empresas"
+                               FontSize="20"
+                               FontWeight="Bold"
+                               Foreground="White"
+                               VerticalAlignment="Center"/>
+
+                    <Button x:Name="BtnCrearEmpresa"
+                            Grid.Column="1"
+                            Content="Crear Empresa"
+                            Width="155"
+                            Height="38"
+                            Background="#4A148C"
+                            Foreground="White"
+                            FontSize="14"
+                            FontWeight="SemiBold"
+                            BorderBrush="#E1BEE7"
+                            BorderThickness="1"
+                            Cursor="Hand">
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border x:Name="btnBorder"
+                                        Background="{TemplateBinding Background}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        BorderThickness="{TemplateBinding BorderThickness}"
+                                        CornerRadius="8">
+                                    <ContentPresenter HorizontalAlignment="Center"
+                                                      VerticalAlignment="Center"/>
+                                </Border>
+                                <ControlTemplate.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Background" Value="#5E1688"/>
+                                    </Trigger>
+                                    <Trigger Property="IsPressed" Value="True">
+                                        <Setter TargetName="btnBorder" Property="Background" Value="#38006B"/>
+                                    </Trigger>
+                                </ControlTemplate.Triggers>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </Grid>
+
+                <!-- Línea separadora -->
+                <Separator Grid.Row="1"
+                           Background="#B0B0B0"
+                           Height="1"
+                           Margin="0,14,0,14"/>
+
+                <!-- Tabla o grilla con los campos (Id, Razon social, RUC, Corporacion) -->
+                <DataGrid x:Name="dgvEmpresas"
+                          Grid.Row="2"
+                          AutoGenerateColumns="False"
+                          CanUserAddRows="False"
+                          IsReadOnly="True"
+                          HeadersVisibility="Column"
+                          GridLinesVisibility="Horizontal"
+                          HorizontalGridLinesBrush="#E0E0E0"
+                          RowHeight="40"
+                          ColumnHeaderHeight="40"
+                          Background="White"
+                          Foreground="#212121"
+                          BorderBrush="#4A148C"
+                          BorderThickness="1">
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Header="Id"
+                                            Binding="{Binding Id}"
+                                            Width="70"/>
+                        <DataGridTextColumn Header="Razon social"
+                                            Binding="{Binding RazonSocial}"
+                                            Width="*"/>
+                        <DataGridTextColumn Header="RUC"
+                                            Binding="{Binding RUC}"
+                                            Width="150"/>
+                        <DataGridTextColumn Header="Corporacion"
+                                            Binding="{Binding Corporacion}"
+                                            Width="*"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </Grid>
+
+            <!-- Vista 3: Configurar Documentos -->
+            <Grid x:Name="ViewConfigurarDocumentos" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Configurar Documentos"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"/>
+
+                <Separator Grid.Row="1"
+                           Background="#B0B0B0"
+                           Height="1"
+                           Margin="0,14,0,16"/>
+
+                <Border Grid.Row="2"
+                        Background="#6A1B9A"
+                        CornerRadius="10"
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Función del apartado: Configurar Documentos"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="White"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Este apartado permite asignar, activar o desactivar los tipos de documentos electrónicos (Facturas, Boletas, Notas de Crédito, Notas de Débito y Guías de Remisión) que cada empresa registrada está autorizada a emitir y enviar a SUNAT."
+                                   FontSize="14"
+                                   Foreground="#F3E5F5"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+            <!-- Vista 4: Personalizar -->
+            <Grid x:Name="ViewPersonalizar" Visibility="Collapsed">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+
+                <TextBlock Grid.Row="0"
+                           Text="Personalizar"
+                           FontSize="20"
+                           FontWeight="Bold"
+                           Foreground="White"/>
+
+                <Separator Grid.Row="1"
+                           Background="#B0B0B0"
+                           Height="1"
+                           Margin="0,14,0,16"/>
+
+                <Border Grid.Row="2"
+                        Background="#6A1B9A"
+                        CornerRadius="10"
+                        Padding="20">
+                    <StackPanel>
+                        <TextBlock Text="Función del apartado: Personalizar"
+                                   FontSize="16"
+                                   FontWeight="SemiBold"
+                                   Foreground="White"
+                                   Margin="0,0,0,8"/>
+                        <TextBlock Text="Este apartado permite personalizar y mapear los nombres de los campos propios de cada empresa con los campos originales requeridos por la estructura estándar de los comprobantes electrónicos para su correcta integración con SUNAT."
+                                   FontSize="14"
+                                   Foreground="#F3E5F5"
+                                   TextWrapping="Wrap"/>
+                    </StackPanel>
+                </Border>
+            </Grid>
+
+        </Grid>
+    </Grid>
+</UserControl>

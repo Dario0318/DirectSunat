@@ -1,0 +1,50 @@
+﻿<Window x:Class="DirectSunat.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DirectSunat"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid>
+        <!-- StackPanel principal para ordenar el título arriba y el login centrado -->
+        <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center">
+
+            <!-- Título del proyecto fuera del GroupBox, ubicado más arriba -->
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <TextBlock Text="Direct" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           FontStyle="Italic" 
+                           Foreground="Purple"/>
+                <TextBlock Text="Sunat" 
+                           FontSize="24" 
+                           FontWeight="Bold" 
+                           Foreground="#333333"/>
+            </StackPanel>
+
+            <!-- GroupBox del Login -->
+            <GroupBox Height="250" Width="275">
+                <GroupBox.Header>
+                    <TextBlock Text="Inicio de Sesión" HorizontalAlignment="Center" FontWeight="Bold"/>
+                </GroupBox.Header>
+
+                <StackPanel Margin="2">
+                    <Label Content="Usuario:" Height="25" Margin="0,0,0,5"/>
+                    <TextBox x:Name="txtNomUsuario" Height="25" Margin="0,0,0,10"/>
+
+                    <Label Content="Contraseña:" Height="25" Margin="0,0,0,5"/>
+                    <PasswordBox x:Name="txtContraseña" Height="25" Margin="0,0,0,15"/>
+
+                    <Button x:Name="BtnAceptar" Content="Ingresar" 
+                            Height="30" 
+                            Width="200" 
+                            Background="Purple" 
+                            Foreground="White" 
+                            FontWeight="Bold" Click="BtnAceptar_Click"/>
+                </StackPanel>
+            </GroupBox>
+
+        </StackPanel>
+    </Grid>
+</Window>
